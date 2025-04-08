@@ -1,5 +1,3 @@
-# BuddyBank - Contact Management System
-
 <div align="center">
   <h1>BuddyBank</h1>
   <p><strong>Your Personal Contact Manager with Style</strong></p>
@@ -125,9 +123,6 @@ This application is ready to deploy on Vercel:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
