@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Contact - BuddyBank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --secondary-color: #f3f4f6;
+        --accent-color: #f59e0b;
+        --text-color: #1f2937;
+        --border-color: #e5e7eb;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        color: var(--text-color);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 0.5rem;
+          align-items: flex-start;
+        }
+      }
+
+      .update-container {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        animation: fadeInUp 1s;
+        border: 1px solid var(--border-color);
+        margin: 1rem 0;
+      }
+
+      @media (max-width: 768px) {
+        .update-container {
+          padding: 1.5rem;
+          margin: 0.5rem 0;
+          border-radius: 16px;
+        }
+      }
+
+      .update-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .update-header {
+          margin-bottom: 1rem;
+        }
+      }
+
+      .update-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .update-title {
+          font-size: 1.5rem;
+        }
+      }
+
+      .update-subtitle {
+        color: #6b7280;
+        font-size: 0.875rem;
+      }
+
+      .form-control {
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1.25rem;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .form-control {
+          padding: 0.625rem 0.875rem;
+          margin-bottom: 1rem;
+          font-size: 0.875rem;
+        }
+      }
+
+      .form-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .btn-update {
+        background-color: var(--primary-color);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        width: 100%;
+        color: white;
+        font-size: 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .btn-update {
+          padding: 0.625rem 1.25rem;
+          font-size: 0.875rem;
+        }
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        margin-top: 1.25rem;
+        transition: all 0.3s ease;
+        font-size: 0.875rem;
+      }
+
+      @media (max-width: 768px) {
+        .back-link {
+          margin-top: 1rem;
+          font-size: 0.75rem;
+        }
+      }
+
+      .avatar-preview {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin: 0 auto 1.25rem;
+        border: 3px solid var(--primary-color);
+        overflow: hidden;
+        animation: pulse 2s infinite;
+      }
+
+      @media (max-width: 768px) {
+        .avatar-preview {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .avatar-preview img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+</head>
+<body>
+    <div class="update-container">
+        <div class="update-header">
+            <h1 class="update-title">
+                <i class="fas fa-user-edit"></i>
+                Update Contact
+            </h1>
+            <p class="update-subtitle">Edit your contact information</p>
+        </div>
+
+        <div class="avatar-preview">
+            <img src="https://robohash.org/<%= contact.name %>.png" alt="<%= contact.name %>">
+        </div>
+
+        <form action="/update/<%= contact.id %>" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" 
+                       name="name" 
+                       value="<%= contact.name %>" 
+                       id="name" 
+                       class="form-control" 
+                       placeholder="Enter name"
+                       required>
+            </div>
+            <div class="mb-3">
+                <label for="number" class="form-label">Phone Number</label>
+                <input type="tel" 
+                       name="number" 
+                       value="<%= contact.number %>" 
+                       id="number" 
+                       class="form-control" 
+                       placeholder="Enter phone number"
+                       required>
+            </div>
+            <button type="submit" class="btn btn-update">
+                <i class="fas fa-save"></i> Update Contact
+            </button>
+        </form>
+
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i>
+            Back to Contacts
+        </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

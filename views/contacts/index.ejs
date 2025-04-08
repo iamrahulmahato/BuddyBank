@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="max-w-7xl mx-auto bg-gray-100 grid grid-flow-col grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <% for(i of contact_list){%>
+      <div class="shadow rounded-md w-64">
+        <div alt="profile" class="rounded-t-lg h-28 w-full mb-4 bg-purple-500"> </div>
+        <div class="flex flex-col items-center justify-center p-4 -mt-16">
+          <a href="#" class="block relative">
+            <img alt="profil" src="https://robohash.org/<%= i.name %>.png" class="mx-auto object-cover rounded-full h-16 w-16 bg-white" />
+          </a>
+          <p class="text-gray-800 dark:text-white text-xl font-medium mt-2"><%= i.name %></p>
+          <p class="text-gray-400 text-xs"><%= i.number %></p>
+          <div class="flex items-center justify-between gap-4 w-full mt-8">
+            <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              <!-- Heroicon name: solid/pencil -->
+              <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+              </svg>
+              Edit
+            </button>
+            <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 w-full text-center">
+              <!-- Heroicon name: solid/check -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              Delete
+            </button>
+          </div>
+          <div class="flex items-center justify-between gap-4 w-full mt-2">
+            
+        </div>
+      </div>
+    </div>
+    <%}%>
+    
+    <!-- <div class="container">
+      <div class="columns is-multiline">
+        <% for(i of contact_list){%>
+        <div class="column is-4">
+          <div class="card h-card">
+            <header class="card-header">
+              <div class="card-header-title">Featured Story</div>
+              <a href="#" class="card-header-icon text-instagram">
+                <span class="icon">
+                  <i aria-hidden="true" class="fab fa-instagram"></i>
+                </span>
+              </a>
+            </header>
+            <div class="card-content">
+              <div class="media-flex p-b-10">
+                <div class="h-avatar is-medium">
+                  <img
+                    class="avatar is-squared"
+                    src="https://robohash.org/<%= i.name %>.png"
+                  />
+                </div>
+                <div class="flex-meta">
+                  <span>Mary L.</span>
+                  <span>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus nec iaculis mauris.
+                  </span>
+                  <span>
+                    <a class="text-twitter" href="#">@bulmaio</a>.
+                    <a class="text-twitter" href="#">#css</a>
+                    <a class="text-twitter" href="#">#responsive</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a href="#" class="card-footer-item">Save</a>
+              <a href="#" class="card-footer-item">Edit</a>
+            </footer>
+          </div>
+        </div>
+
+        <%}%>
+      </div>
+    </div> -->
+  </body>
+</html>

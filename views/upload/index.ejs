@@ -1,0 +1,10 @@
+<% if (messages.success) { %>
+<p style="color:greenyellow;"><%= messages.success %></p>
+<% } %>
+
+<a href="/showImages"> show all images</a>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="avatar" id="avatar" required>
+    <input type="submit" value="Upload">
+</form>

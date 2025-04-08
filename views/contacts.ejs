@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BuddyBank - Contact Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --secondary-color: #f3f4f6;
+        --accent-color: #f59e0b;
+        --text-color: #1f2937;
+        --border-color: #e5e7eb;
+        --success-color: #10b981;
+        --danger-color: #ef4444;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        color: var(--text-color);
+        margin: 0;
+        padding: 1rem;
+        min-height: 100vh;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 0.5rem;
+        }
+      }
+
+      .app-header {
+        text-align: center;
+        margin-bottom: 2rem;
+        animation: fadeInDown 1s;
+        padding: 1rem;
+      }
+
+      .app-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 25%, #f59e0b 50%, #ec4899 75%, #4f46e5 100%);
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: gradient 8s ease infinite;
+        text-shadow: none;
+        position: relative;
+        display: inline-block;
+      }
+
+      .app-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, #4f46e5, #7c3aed, #f59e0b, #ec4899, #4f46e5);
+        background-size: 200% 100%;
+        animation: gradient 8s ease infinite;
+        border-radius: 3px;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .app-subtitle {
+        color: #6b7280;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .app-subtitle::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, #4f46e5, #7c3aed);
+        border-radius: 2px;
+      }
+
+      @media (max-width: 768px) {
+        .app-header {
+          margin-bottom: 1.5rem;
+        }
+        .app-title {
+          font-size: 2rem;
+        }
+        .app-subtitle {
+          font-size: 1rem;
+        }
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 0 0.5rem;
+        }
+      }
+
+      .form-container {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s;
+        border: 1px solid var(--border-color);
+      }
+
+      @media (max-width: 768px) {
+        .form-container {
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      .form-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .form-title i {
+        color: var(--primary-color);
+      }
+
+      .form-control {
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-primary:hover {
+        background-color: #4338ca;
+        transform: translateY(-2px);
+      }
+
+      .btn-primary:active {
+        transform: translateY(0);
+      }
+
+      .contact-card {
+        background: white;
+        border-radius: 16px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-color);
+        animation: fadeInUp 1s;
+      }
+
+      @media (max-width: 768px) {
+        .contact-card {
+          padding: 0.75rem;
+        }
+      }
+
+      .contact-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 0.75rem;
+        border: 2px solid var(--primary-color);
+        transition: transform 0.3s ease;
+      }
+
+      @media (max-width: 768px) {
+        .contact-avatar {
+          width: 40px;
+          height: 40px;
+          margin-right: 0.5rem;
+        }
+      }
+
+      .contact-info h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--text-color);
+      }
+
+      .contact-info p {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .contact-actions {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      @media (max-width: 768px) {
+        .contact-actions {
+          flex-direction: column;
+        }
+      }
+
+      .btn-icon {
+        padding: 0.5rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn-edit {
+        color: var(--primary-color);
+      }
+
+      .btn-delete {
+        color: var(--danger-color);
+      }
+
+      .modal-content {
+        border-radius: 16px;
+        border: none;
+      }
+
+      .modal-header {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .modal-footer {
+        border-top: none;
+      }
+
+      .modal-dialog {
+        margin: 1rem;
+      }
+
+      .success-message {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        background: var(--success-color);
+        color: white;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: slideInRight 0.5s, fadeOut 0.5s 2.5s forwards;
+        z-index: 1000;
+        text-align: center;
+      }
+
+      @media (min-width: 768px) {
+        .success-message {
+          left: auto;
+          width: auto;
+          min-width: 300px;
+        }
+      }
+
+      .btn-danger {
+        background-color: var(--danger-color);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 12px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+        color: white !important;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-danger:hover {
+        background-color: #dc2626;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(239, 68, 68, 0.2);
+        color: white !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-header">
+      <h1 class="app-title">BuddyBank</h1>
+      <p class="app-subtitle">Your Personal Contact Manager</p>
+      <form action="/logout" method="GET" style="display: inline;">
+        <button type="submit" class="btn btn-danger">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </form>
+    </div>
+
+    <div class="container mt-4">
+      <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <%= error %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+      
+      <% if (typeof success !== 'undefined' && success) { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <%= success %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+
+      <h2>My Contacts</h2>
+      <div class="form-container">
+        <h2 class="form-title">
+          <i class="fas fa-user-plus"></i>
+          Add New Contact
+        </h2>
+        <form action="/aboutme" method="POST">
+          <div class="mb-3">
+            <input type="text" name="name" class="form-control" placeholder="Name" required>
+          </div>
+          <div class="mb-3">
+            <input type="tel" name="number" class="form-control" placeholder="Phone Number" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">
+            <i class="fas fa-plus"></i> Add Contact
+          </button>
+        </form>
+      </div>
+
+      <div class="row">
+        <% for(i of contact_list){%>
+        <div class="col-md-6 col-lg-4">
+          <div class="contact-card">
+            <div class="d-flex align-items-center">
+              <img class="contact-avatar" src="https://robohash.org/<%= i.name %>.png" alt="<%= i.name %>">
+              <div class="contact-info flex-grow-1">
+                <h4><%= i.name %></h4>
+                <p><i class="fas fa-phone"></i> <%= i.number %></p>
+              </div>
+              <div class="contact-actions">
+                <a href="/update/<%= i.id%>" class="btn btn-icon btn-edit" title="Edit Contact">
+                  <i class="fas fa-edit"></i>
+                </a>
+                <button type="button" class="btn btn-icon btn-delete" title="Delete Contact" onclick="confirmDelete('<%= i.id %>', '<%= i.name %>')">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%}%>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete <span id="contactName" class="fw-bold"></span>?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">
+              <i class="fas fa-trash"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentContactId = null;
+      const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+
+      function confirmDelete(id, name) {
+        currentContactId = id;
+        document.getElementById('contactName').textContent = name;
+        deleteModal.show();
+      }
+
+      document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+        if (currentContactId) {
+          window.location.href = `/delete/${currentContactId}`;
+        }
+      });
+
+      // Show success message if exists
+      <% if (typeof success !== 'undefined' && success) { %>
+        const successMessage = document.createElement('div');
+        successMessage.className = 'success-message';
+        successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Contact deleted successfully!';
+        document.body.appendChild(successMessage);
+        setTimeout(() => successMessage.remove(), 3000);
+      <% } %>
+    </script>
+  </body>
+</html>

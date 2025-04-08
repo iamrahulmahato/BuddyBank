@@ -1,0 +1,6 @@
+<a href="/upload">Upload a image</a>
+<% for ( img of images) { %>
+<img src="http://localhost:8000/<%= img.path %>" alt="<%= img.originalname %>" height="300" >
+<h2><%= img.originalname %></h2>
+<h3><%= img.size/100 %> KB</h3>
+<% } %>
